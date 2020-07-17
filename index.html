@@ -18,6 +18,7 @@
         const URL = "./my_model/";
     
         let model, webcam, labelContainer, maxPredictions;
+        let checkOperate=0; // 전역변수로 체킹 변수 설정
         
         // Load the image model and setup the webcam
         async function init() {
@@ -33,68 +34,80 @@
             await webcam.setup(); // request access to the webcam
             await webcam.play(); //웹캠 재생
 
-            window.requestAnimationFrame(loop); // 인식 판정을 하기 위한 루프 돌리기
-            //requestAnimationFrame(): 애니메이션을 업데이트 하기 위하는 함수를 실행
-    
-            document.getElementById("webcam-container").appendChild(webcam.canvas);//미리 만들어놓은 div에 웹캠화면을 출력한다.
+            window.requestAnimationFrame(loop); 
+            document.getElementById("webcam-container").appendChild(webcam.canvas);
             labelContainer = document.getElementById("label-container"); 
             for (let i = 0; i < maxPredictions; i++) {
                 labelContainer.appendChild(document.createElement("div"));
             }
+            
         }
     
         async function loop() {
-
-            await webcam.update(); //웹캠을 업데이트 한다.
-            //await : async함수 안에서 사용 가능 == await 구문의 데이터 처리가 끝나면 다음 코드를 실행한다.
             
-            await setTimeout(function() {
-                webcam.pause();//웹캠을 일시 정지한다
-                /*
-                  webcam.setup() => 웹캠에 접근
-                  webcam.play() => 웹캠 실행
-                  webcam.pause() => 웹캠 일시정지
-                  webcam.stop() => 웹캠 정지 그냥 정지 아예 정지
-                */
-                predict();//판별하는 함수
-            }, 3000);
-            /*
-            setTimeout(function(),sec) : sec초 뒤에 function을 실행한다. sec : 1000에 1초/ 3초 => sec== 3000 
-            */
+           
+            await webcam.update(); 
 
-            labelContainer.childNodes[0].innerHTML = "판단을 시작하지 뚜두둔"; // 실행확인을 위한 가시화
-            await webcam.play(); // 일시정지했던 웹캠을 다시 실행시킨다
-            //await : 실행이 완료 될 때까지 다음 라인이 진행되지 않음
+            if(checkOperate==300){
+                labelContainer.childNodes[0].innerHTML = "판단을 시작하지 뚜두둔"; 
+                await predict();
 
-            window.requestAnimationFrame(loop); //순서 변경 x : 가장 밑 자리 고정 재귀를 사용하여 함수 호출
+                await webcam.play(); 
+                await console.log("Play!! DID!!!");
+                checkOperate=0;
+                await window.requestAnimationFrame(loop); //순서 변경 x 
+
+            }
+            else if(checkOperate<300){
+                checkOperate++;
+                await console.log("루프돌자 슝슝");
+                await window.requestAnimationFrame(loop); //순서 변경 x 
+            }
         }
 
+        // async function loopCheck(){
+           
+
+        // }
+        
         function check(prediction){
             return new Promise(function(resolve,reject){
-                //setTimeout을 사용하기 위해 Promise 형태의 함수를 사용
                 if(prediction[0].className == "mask" && prediction[0].probability.toFixed(2)>=0.70){
-                    resolve("마스크 착용"); // 함수가 실행되었을 때
-                    //해야 하는거 : 안내 창 띄우고 자동 지우기
+                    resolve("마스크 착용");
+                    console.log("응");
+                    //여기서 해야 하는거 : 안내 창 띄우고 자동 지우기 근데 야발 아무것도 못하고 있잖아 시불
                 }else if(prediction[1].className == "no mask" && prediction[1].probability.toFixed(2)>=0.70){
                     resolve("마스크 미착용");
-                    console.log("마스크 미착용"); //콘솔창에 정보띄우기
+                    console.log("아니"); 
                 }else{
                     resolve("불분명");
                     console.log("불분명함");
                 }
-                reject("엥 안되넹");//함수가 실행되지 않았을 때 반환하는 값
+                reject("엥 안되넹");
             });
         }
         
         async function predict() {
+            console.log(1);
+
+            webcam.pause(); 
+            console.log("일시정지 완료");
+
             const prediction =  await model.predict(webcam.canvas);
-            console.log(1); // 콘솔창에확인하기 위함
+            console.log("predict success"); 
             
-            var result = await check(prediction); // 변수 result에 결과값을 저장
-            labelContainer.childNodes[1].innerHTML = result; // 결과값을 가시화
-            
-            console.log("결과 출력"); // 확인을 위한 콘솔창 출력
-            labelContainer.childNodes[1].innerHTML = "검사가 완료되었습니다";
+
+            var result = await check(prediction); 
+            labelContainer.childNodes[1].innerHTML = result; 
+            await setTimeout(function(){
+                console.log("결과 출력 완료");
+                labelContainer.childNodes[0].innerHTML = "검사가 완료되었습니다";
+
+            },2000)
+            labelContainer.childNodes[0].innerHTML = "";
+            labelContainer.childNodes[1].innerHTML = "";
+
+
         }
         
     </script>
