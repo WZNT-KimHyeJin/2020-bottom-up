@@ -7,6 +7,8 @@ var audio1 = new Audio("./검사가 완료되었습니다.mp3");
 var audio2 = new Audio("./마스크를 착용해주세요.mp3");
 var audio3 = new Audio("./마스크 착용은 필수입니다.mp3");
 let maskimgsrc = "maskimg.png";
+let alert_maskOn = "alert_maskOn.png";
+let alert_maskOff = "alert_maskOff.png";
 
 let checkResult; // 판정 값 check함수로부터의 반환값을 받아온다.
 let stopOperate =0; // stop 버튼 활성화 여부 0: 비활, 1 : 정지
@@ -146,7 +148,7 @@ async function predict() {
     audio1.currentTime = 0;
     audio1.play();
     document.getElementById("text").innerHTML = "검사가 완료되었습니다.";
-    document.getElementById("maskimg").src = maskimgsrc;
+    document.getElementById("maskimg").src = alert_maskOn;
     
     await countmaskon();
     
@@ -157,13 +159,14 @@ async function predict() {
     await new Promise((resolve, reject) => {
       setTimeout(() => {
         audio1.pause();
+        resolve("");
       }, 2000);
     });
   } else if (checkResult == 0) {//마스크 미착용 시
     audio2.currentTime = 0;
     audio2.play();
     document.getElementById("text").innerHTML = "마스크를 착용해주세요!";
-    document.getElementById("maskimg").src = maskimgsrc;
+    document.getElementById("maskimg").src = alert_maskOff;
     
     await countmaskoff();
 

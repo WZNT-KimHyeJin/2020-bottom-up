@@ -148,9 +148,12 @@
   margin: 30px;
 }
 
-.modal .maskimg {
-  width: 210px;
-  height: 350px;
+.modal #maskimg {
+  /* width: 210px; */
+  /* height: 350px; */
+  width: 100px;
+  height: 100px;
+  
 }
 .cntMask{ 
   /* 판단을 시작할 때 결과창을 띄우기 위해서 counting 클래스 인자들을 모두 none 처리 해 둔다 */
@@ -160,3 +163,7 @@
   /* 처음 재생 시에는 stop 버튼이 안보이도록 해 놓음 */
   display:none;
 }
+.modalcontent .alerting{
+  float: left;
+}
+
