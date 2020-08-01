@@ -163,7 +163,5 @@
   /* 처음 재생 시에는 stop 버튼이 안보이도록 해 놓음 */
   display:none;
 }
-.modalcontent .alerting{
-  float: left;
-}
+
 

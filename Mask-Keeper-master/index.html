@@ -11,7 +11,7 @@
 </head>
 <body class="index_body">
     <div class="index_title" >Mask Keeper</div>
-    <button type="button" class="start_btn" id="start_btn" onclick="init()">Start</button>
+    <button type="button" class="start_btn" id="start_btn" onclick="p_init()">Start</button>
     <div id="webcam-container" class="webcam"></div>
     <div id="label-container" class="label"></div>
     <div class="counting">
@@ -26,12 +26,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
     <div id="myModal" class="modal">
         <div class="modalcontent">
-            <div class ="alerting">
             <img id="maskimg" class="alerting" src="">
-            </div>
-            <div class ="alerting">
             <span id="text" class="alerting"></span>
-            </div>
             <!-- <br> -->
         </div>
     </div>
