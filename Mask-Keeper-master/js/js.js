@@ -33,7 +33,7 @@ var countmaskoff;
 var count;
 
 const flip = true; 
-webcam = new tmImage.Webcam(200, 200, flip); 
+webcam = new tmImage.Webcam(250, 250, flip); 
 
 async function stopPlay(){ // 정지 버튼을 누를 때 실행되는 함수
   stopOperate=1; // 정지 버튼 활성화
@@ -141,9 +141,7 @@ async function predict() {
     document.getElementById("text").innerHTML = "검사가 완료되었습니다.";
     document.getElementById("maskimg").src = alert_maskOn;
 
-    for(let i=0;i<warningText.length;i++){
-      warningText[i].style.display='none';
-    }
+    document.getElementById("modalText").style.display="none";
 
     await countmaskon();
     
@@ -163,9 +161,7 @@ async function predict() {
     document.getElementById("text").innerHTML = "마스크를 착용해주세요!";
     document.getElementById("maskimg").src = alert_maskOff;
     document.getElementById("warningCNT").innerHTML=document.getElementById("count_1").innerHTML;
-    for(let i=0;i<warningText.length;i++){
-      warningText[i].style.display='block';
-    }
+    document.getElementById("modalText").style.display="block";
     
     await countmaskoff();
 

@@ -1,5 +1,3 @@
-/** 자바스크립트 내의 요소들 정렬하기 ex) 검사가 완료되었습니다 텍스트**/
-
 .index_body {
   display: flex;
   flex-direction: column;
@@ -103,25 +101,31 @@
 }
 .modal .modalcontent {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto; 
+  /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
   width: 50%; /* Could be more or less, depending on screen size */
 }
-.modal #modalText {
+.modalcontent .firstcontent{
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 50%; /* Could be more or less, depending on screen size */
+  justify-content: space-around;
+}
+.modalcontent .firstcontent #text{
+  font-weight: bolder;
+}
+.modal #modalText {
+  font-weight: bold;
+  font-size: large;
+}
+.modal #warningCNT{
+  color: red;
 }
 
 .modal #text {
