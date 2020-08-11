@@ -11,7 +11,7 @@
 </head>
 <body class="index_body">
     <div class="index_title" >Mask Keeper</div>
-    <button type="button" class="start_btn" id="start_btn" onclick="p_init()">검사 시작</button>
+    <button type="button" class="btn" id="start_btn" onclick="p_init()">검사 시작</button>
     <div id="webcam-container" class="webcam"></div>
     <div id="label-container" class="label"></div>
     
@@ -22,9 +22,12 @@
         <img id="maskOff" class="cntMask" src="maskoff.png">
         <div id="count_2" class="cntMask">0</div>
     </div>
+    <div id ="buttons">
+        <button type="button" class="btn" onclick="pausePRD()" id = "pause_btn">일시정지</button>
+        <button type="button" class="btn" onclick="stopPlay()" id = "stop_btn">검사 종료</button>
+    </div>
 
-    <button type="button" class="stop_btn" onclick="stopPlay()" id = "stop_btn">검사 종료</button>
-    <img id="mute" src="mute.jpg">
+    <img type ="button" id="mute" src="soundOn.jpg">
     <!-- 위치 바꿔도 상관 없듬 -->
     
     

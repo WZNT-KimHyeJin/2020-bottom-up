@@ -16,7 +16,8 @@
   font-size: 70px;
 }
 
-.index_body .start_btn {
+
+.index_body .btn {
   width: 140px;
   height: 45px;
   margin: 30px;
@@ -34,46 +35,24 @@
   outline: none;
 }
 
-.index_body .start_btn:hover {
+.index_body .btn:hover {
   background-color: #1f9be2c2;
   box-shadow: 0px 15px 20px rgba(39, 130, 233, 0.5);
   color: #fff;
   transform: translateY(-7px);
+  transition-property: font-size;
+  transition-duration: 1s;
 }
 
-.index_body .start_btn:visited {
+.index_body .btn:visited {
   background-color: white;
 }
-
-.index_body .stop_btn {
-  width: 140px;
-  height: 45px;
-  margin: 30px;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  font-weight: 500;
-  color: #000;
-  background-color: #fff;
-  border: none;
-  border-radius: 45px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
-  outline: none;
+.index_body #pause_btn{
+  display: none;
 }
-
-.index_body .stop_btn:hover {
-  background-color: #1f9be2c2;
-  box-shadow: 0px 15px 20px rgba(39, 130, 233, 0.5);
-  color: #fff;
-  transform: translateY(-7px);
+.index_body #stop_btn{
+  display: none;
 }
-
-.index_body .stop_btn:visited {
-  background-color: white;
-}
-
 .index_body .webcam {
   margin-bottom: 30px;
 }
@@ -139,6 +118,12 @@
   align-items: center;
   justify-content: center;
 }
+.index_body #buttons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 
 #count_1 {
   font-family: "Anton", sans-serif;
@@ -156,12 +141,14 @@
   width: 50px;
   height: 50px;
   margin: 30px;
+  border-radius: 50px;
 }
 
 #maskOff {
   width: 50px;
   height: 50px;
   margin: 30px;
+  border-radius: 50px;
 }
 
 .modal #maskimg {
@@ -187,9 +174,11 @@
   justify-content: center;
 }
 .index_body #mute{
-  width: 20px;
-  height: 20px;
-  border: 2px purple;
+  width: 25px;
+  height: 25px;
+  float: right;
+  border-radius: 50px;
+  border: 1px solid black;
 }
 .index_body #mute :hover{
   background-color: #1f9be2c2;
@@ -197,6 +186,6 @@
   transform: translateY(-7px);
 }
 
-.index_body #mute {
+.index_body #mute :visited {
   background-color: gray;
 }
