@@ -6,7 +6,7 @@ html{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 30px;
+  padding: 0px;
   margin: 30px;
   letter-spacing: 2.5px;
   font-weight: 500;
@@ -40,8 +40,8 @@ html{
 }
 
 .index_body .btn:hover {
-  background-color: #1f9be2c2;
-  box-shadow: 0px 15px 20px rgba(39, 130, 233, 0.5);
+  background-color: rgb(161, 160, 160);
+  box-shadow: 0px 15px 20px  rgb(180, 180, 180);
   color: #fff;
   transform: translateY(-7px);
   transition-property: font-size;
@@ -64,33 +64,6 @@ html{
   transition: all 0.3s ease 0s;
   cursor: pointer;
   outline: none;
-}
-
-.index_body .btn3 {
-  width: 100px;
-  height: 30px;
-  margin: 10px;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  font-weight: bolder;
-  color: #1D3689;
-  background-color: white;
-  border: 2px solid #1D3689;
-  border-radius: 15px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
-  outline: none;
-}
-
-.index_body .btn3:hover {
-  background-color: #34498d;
-  box-shadow: 0px 15px 20px #34498d;
-  color: #fff;
-  transform: translateY(-7px);
-  transition-property: font-size;
-  transition-duration: 1s;
 }
 
 .index_body .btn:visited {
@@ -133,25 +106,43 @@ html{
   align-items: center;
   justify-content: center;
   background-color: #fefefe;
-  margin: 15% auto; 
+  margin: 50% auto; 
   /* 15% from the top and centered */
-  padding: 5%;
+  padding: 0%;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+}
+.modal .modalcontent2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fefefe;
+  margin: 5% auto; 
+  /* 15% from the top and centered */
+  padding: none;
+  border: 1px solid #888;
+  width: 90%; /* Could be more or less, depending on screen size */
 }
 .modalcontent .firstcontent{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  width: 95%;
 }
 .modalcontent .firstcontent #text{
   font-weight: bolder;
-  font-size: 2rem;
+  font-size: 1.2rem;
 }
 .modal #modalText {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  width: 90%;
+  text-align: center;
 }
 .modal #warningCNT{
   color: red;
@@ -161,6 +152,14 @@ html{
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+.modal #modalImfo2{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .index_body .counting {
@@ -194,8 +193,7 @@ html{
   height: 100%;
 }
 .modal #maskimg {
-  /* width: 210px; */
-  /* height: 350px; */
+  margin: 5%;
   width: 100px;
   height: 100px;
   
@@ -221,6 +219,7 @@ html{
   float: right;
   border-radius: 50px ;
   border: 2px solid #1D3689;
+  margin: 10px;
 }
 
 
@@ -240,8 +239,55 @@ html{
   text-decoration: none;
   cursor: pointer;
 }
+
+iframe{
+  top: -200px; 
+  left: -200px;
+  width: 500px 100%;
+  height: 600px;
+}
+
+.dropbtn {
+  background-color: #1D3689;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color:  rgb(161, 160, 160);
+}
+
+.dropdown {
+  position: relative;
+  margin-right: 300px;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+.dropdown-content a :hover {background-color: #f1f1f1}
+.show {display:block;}
+
 .index_body #LD{
   display: none;
-  width: 100px;
+  width: 250px;
   border: 2px solid #1D3689
+  
 }

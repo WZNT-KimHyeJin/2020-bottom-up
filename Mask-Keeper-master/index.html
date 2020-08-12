@@ -10,8 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body class="index_body" id="index_body">
+    <div class="dropdown">
+        <button onclick="dropdownclick()" class="dropbtn">menu</button>
+        <div id="myDropdown" class="dropdown-content">
+        
+            <a onclick="imfo_f()">사용 방법</a>
+            <a onclick="intromask_f()">마스크 착용</a>
+        </div>
+    </div>
+
     <div class="index_title" id="index_title">Mask Keeper</div>
     <button type="button" class="btn" id="start_btn" onclick="p_init()">검사 시작</button>
+    
     <img id ="LD" src="LDing.gif">
     <div id="webcam-container" class="webcam"></div>
     <div id="label-container" class="label"></div>
@@ -32,9 +42,6 @@
     <br>
     <br>
     <div id ="buttons">
-        <button type="button" class="btn3" onclick="imfo_f()" id = "?">사용방법</button>
-        <button type="button" class="btn3" onclick="intromask_f()" id = "introMask">마스크 착용법</button>
-        <button type="button" class="btn3" onclick="" id = "website">코로나19 현황</button>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
@@ -46,11 +53,19 @@
                 <span id="text" class="alerting">   </span>
             </div>
             <div id ="modalText">
-                <br>
-                <br>
-                <span class= "warningText">당신을 제외한 </span>
-                <span class= "warningText" id="warningCNT">0</span>
-                <span class= "warningText">명이 마스크를 착용하였습니다.</span>
+                <div>
+                    <br>
+                    <span class= "warningText">당신을 제외한 </span>
+                    <span class= "warningText" id="warningCNT">0</span>
+                    <span class= "warningText">명이</span>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                    <span class="warningText">마스크를 착용하였습니다.</span>
+                    <br>
+                    <br>
+                </div>
             </div>
         </div>
     </div>
@@ -59,6 +74,14 @@
             <div id="madalImfo">
                 <span class="close">&times;</span>
                 <img id="introMaskimg" src="">
+            </div>
+        </div>
+    </div>
+    <div id="imfoModal2" class="modal">
+        <div class="modalcontent2">
+            <div id="madalImfo2" >
+                <span class="close">&times;</span>
+                <iframe src="https://livecorona.co.kr/"  scrolling="no" frameborder="0"></iframe>
             </div>
         </div>
     </div>

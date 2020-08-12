@@ -32,8 +32,7 @@ var muteSound = document.getElementById("mute");
 var mutecheck = 0; // 0= soundOn , 1 = mute
 
 var span = document.getElementsByClassName("close")[0];
-var imfo = document.getElementById("?");
-var intromask = document.getElementById("introMask"); 
+var span2 = document.getElementsByClassName("close")[1];
 
 let warningText = document.getElementsByClassName("warningText");    
 
@@ -45,6 +44,24 @@ var count;
 
 const flip = true; 
 webcam = new tmImage.Webcam(250, 250, flip); 
+
+function dropdownclick() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 
 async function stopPlay(){ // 정지 버튼을 누를 때 실행되는 함수
   stopOperate=1; // 정지 버튼 활성화
@@ -107,6 +124,9 @@ async function intromask_f(){
 }
 span.onclick = function(){
   imfomodal.style.display = "none";
+}
+span2.onclick = function(){
+  imfomodal2.style.display = "none"
 }
 /////////////////////////////////////////
 
@@ -290,10 +310,9 @@ async function p_init() {
   document.getElementById("maskOff").style.display='block'; // 화난 애 이미지 띄우기
   document.getElementById("count_1").style.display='block'; //마스크 쓴 카운팅 띄우기
   document.getElementById("count_2").style.display='block'; //마스크 안쓴 카운팅 띄우기
-
+  document.getElementById("LD").style.display='block';
   const modelURL_P = URL_P + "p_model.json";
   const metadataURL_P = URL_P + "p_metadata.json";
-  
   
   p_model = await tmImage.load(modelURL_P, metadataURL_P);
   p_maxPredictions = p_model.getTotalClasses();
@@ -304,6 +323,8 @@ async function p_init() {
   
   await webcam.setup(); 
   await webcam.play();
+
+  document.getElementById("LD").style.display='none';
   
   window.requestAnimationFrame(p_loop); // p_loop 함수 실행
   
