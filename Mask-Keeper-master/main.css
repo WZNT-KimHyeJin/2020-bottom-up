@@ -1,3 +1,6 @@
+html{
+  font-size: 10px;
+}
 .index_body {
   display: flex;
   flex-direction: column;
@@ -8,25 +11,26 @@
   letter-spacing: 2.5px;
   font-weight: 500;
 }
-
 .index_body .index_title {
-  padding: 10px;
+  padding: 30px;
   margin: 30px;
   font-family: "Anton", sans-serif;
-  font-size: 70px;
-}
+  font-size: 7rem;
+  color: #1D3689;
 
+  /* animation-play-state: paused; */
+}
 
 .index_body .btn {
   width: 140px;
   height: 45px;
-  margin: 30px;
-  font-size: 11px;
+  margin: 15px;
+  font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 2.5px;
-  font-weight: 500;
-  color: #000;
-  background-color: #fff;
+  font-weight: bolder;
+  color: white;
+  background-color: #1D3689; 
   border: none;
   border-radius: 45px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -38,6 +42,51 @@
 .index_body .btn:hover {
   background-color: #1f9be2c2;
   box-shadow: 0px 15px 20px rgba(39, 130, 233, 0.5);
+  color: #fff;
+  transform: translateY(-7px);
+  transition-property: font-size;
+  transition-duration: 1s;
+}
+
+.index_body .btn2 {
+  width: 120px;
+  height: 35px;
+  margin: 15px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: bolder;
+  color: white;
+  background-color: #1D3689; 
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.index_body .btn3 {
+  width: 100px;
+  height: 30px;
+  margin: 10px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: bolder;
+  color: #1D3689;
+  background-color: white;
+  border: 2px solid #1D3689;
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.index_body .btn3:hover {
+  background-color: #34498d;
+  box-shadow: 0px 15px 20px #34498d;
   color: #fff;
   transform: translateY(-7px);
   transition-property: font-size;
@@ -63,7 +112,7 @@
   align-items: center;
   justify-content: center;
   font-family: "Anton", sans-serif; /*한글 지원 폰트로 변경하기*/
-  font-size: 30px;
+  font-size: 1.5rem;
 }
 
 .index_body .modal {
@@ -86,9 +135,9 @@
   background-color: #fefefe;
   margin: 15% auto; 
   /* 15% from the top and centered */
-  padding: 20px;
+  padding: 5%;
   border: 1px solid #888;
-  width: 50%; /* Could be more or less, depending on screen size */
+  width: 80%; /* Could be more or less, depending on screen size */
 }
 .modalcontent .firstcontent{
   display: flex;
@@ -98,18 +147,20 @@
 }
 .modalcontent .firstcontent #text{
   font-weight: bolder;
+  font-size: 2rem;
 }
 .modal #modalText {
   font-weight: bold;
-  font-size: large;
+  font-size: 2rem;
 }
 .modal #warningCNT{
   color: red;
 }
-
-.modal #text {
-  width: 90;
-  font-size: medium;
+.modal #modalImfo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .index_body .counting {
@@ -125,32 +176,23 @@
   justify-content: center;
 }
 
-#count_1 {
+#count_1, #count_2{
   font-family: "Anton", sans-serif;
-  font-size: 30px;
-  margin: 30px;
+  font-size: 20px;
+  margin: 20px;
 }
 
-#count_2 {
-  font-family: "Anton", sans-serif;
-  font-size: 30px;
-  margin: 30px;
-}
-
-#maskOn {
-  width: 50px;
-  height: 50px;
-  margin: 30px;
+#maskOn, #maskOff  {
+  width: 40px;
+  height: 40px;
+  margin: 20px;
   border-radius: 50px;
 }
 
-#maskOff {
-  width: 50px;
-  height: 50px;
-  margin: 30px;
-  border-radius: 50px;
+#introMaskimg{
+  width: 100%;
+  height: 100%;
 }
-
 .modal #maskimg {
   /* width: 210px; */
   /* height: 350px; */
@@ -173,19 +215,33 @@
   align-items: center;
   justify-content: center;
 }
-.index_body #mute{
+.index_body .circlebutton{
   width: 25px;
   height: 25px;
   float: right;
-  border-radius: 50px;
-  border: 1px solid black;
+  border-radius: 50px ;
+  border: 2px solid #1D3689;
 }
-.index_body #mute :hover{
-  background-color: #1f9be2c2;
-  color: #fff;
-  transform: translateY(-7px);
-}
+
 
 .index_body #mute :visited {
   background-color: gray;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {/*마우스 올렸을때, 클릭할때 색깔 바뀜*/
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.index_body #LD{
+  display: none;
+  width: 100px;
+  border: 2px solid #1D3689
 }

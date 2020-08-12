@@ -7,15 +7,17 @@ let model, webcam, labelContainer, maxPredictions;
 let p_model, p_labelContainer, p_maxPredictions;// 사람 여부 확인 티쳐블 변수
 
 let checkLoop = 0; // 전역변수로 체킹 변수 설정
-let modal = document.getElementById("myModal");
+let mymodal = document.getElementById("myModal");//마스크 확인 띄울 모달
+//이름 바꿈 주의!!!!!!!!!modal->mymodal(변수 우클릭->rename으로 바꿀수 있음)
+let imfomodal = document.getElementById("imfoModal");//정보띄울 모달 
 var audio1 = new Audio("./검사가 완료되었습니다.mp3");
 var audio2 = new Audio("./마스크를 착용해주세요.mp3");
 var audio3 = new Audio("./마스크 착용은 필수입니다.mp3");
-let maskimgsrc = "maskimg.png";
-let alert_maskOn = "alert_maskOn.png";
-let alert_maskOff = "alert_maskOff.png";
+let maskimgsrc = "maskimg.jpg";
+let alert_maskOn = "alert_maskOn.jpg";
+let alert_maskOff = "alert_maskOff.jpg";
 let soundOn = "soundOn.jpg";
-let soundOff = "soundOff.png";
+let soundOff = "soundOff.jpg";
 
 let checkResult; // 판정 값 check함수로부터의 반환값을 받아온다.
 let stopOperate =0; // stop 버튼 활성화 여부 0: 비활, 1 : 정지
@@ -28,6 +30,10 @@ let pause_btn = document.getElementById("pause_btn");
 
 var muteSound = document.getElementById("mute");
 var mutecheck = 0; // 0= soundOn , 1 = mute
+
+var span = document.getElementsByClassName("close")[0];
+var imfo = document.getElementById("?");
+var intromask = document.getElementById("introMask"); 
 
 let warningText = document.getElementsByClassName("warningText");    
 
@@ -55,17 +61,21 @@ async function stopPlay(){ // 정지 버튼을 누를 때 실행되는 함수
   });
 }
 async function pausePRD(){ // 일시 정지 버튼을 누를 때 실행되는 함수
-  if(pauseOperate==0){
+  if(pauseOperate==0){ // 처음 일시정지 누를 때
     pauseOperate=1;
     webcam.pause();
     document.getElementById("pause_btn").innerHTML="검사 진행";
-    p_loop();
-  }else if(pauseOperate==1){
+    predict();
+  }else if(pauseOperate==1){ // 일시정지
+    pauseOperate=2;
+    webcam.pause();
+    document.getElementById("pause_btn").innerHTML="일시정지";
+    loop();
+  }else if(pauseOperate==2){ // 다시 재생
     pauseOperate=0;
     webcam.play();
-    document.getElementById("pause_btn").innerHTML="일시 정지";
     await webcam.play();
-    p_loop();
+    predict();
   }
   
 }
@@ -75,17 +85,30 @@ muteSound.onclick=function(){
     audio2.muted=true;
     audio3.muted=true;
     mutecheck=1;
-    document.getElementById("mute").src = soundOn;
+    document.getElementById("mute").src = soundOff;
   }else{
     audio1.muted=false;
     audio2.muted=false;
     audio3.muted=false;
-    mutecheck=0; // 음소거 상태로 변경
-    document.getElementById("mute").src = soundOff;
+    mutecheck=0;
+    document.getElementById("mute").src = soundOn;
 
   }
 }
-
+////////////////////////////////////////
+//정보 버튼 좌라락 3개중 한버튼 추가 안한상태
+async function imfo_f(){
+  imfomodal.style.display = "block";
+  document.getElementById("introMaskimg").src = "wearMask.jpg";
+}
+async function intromask_f(){
+  imfomodal.style.display = "block";
+  document.getElementById("introMaskimg").src = "wearMask.jpg";
+}
+span.onclick = function(){
+  imfomodal.style.display = "none";
+}
+/////////////////////////////////////////
 
 async function init() {
   window.requestAnimationFrame(loop); 
@@ -94,17 +117,22 @@ async function init() {
 
 async function loop() {
   await webcam.update(); 
-  
+  if(pauseOperate==1){
+    return;
+  }
+  else if(pauseOperate==2){
+    checkLoop=120;
+  }
   if(stopOperate==1){ //정지 버튼 활성화 시 루프 탈출
       checkLoop=200;
   }
-
+  
   if(checkLoop==120){
       var check_predict = await predict(); // 판단 여부를 변수값에 저장
-      //0 : 정지 버튼 눌렀을 떄 , 1 : 진행
+      //0 : 정지 버튼 눌렀을 떄 , 1 : 진행 -2 : 일시정지
 
       if(check_predict==0){
-          return;//정지 버튼을 눌렀을 때 함수를 탈출하여 실행 정지
+          return;//정지 버튼 or 일시정지를 눌렀을 때 함수를 탈출하여 실행 정지
       }
 
       await webcam.play(); 
@@ -123,15 +151,13 @@ async function loop() {
 
 function check(prediction){//predict()의 prediction배열을 파라미터로 받음
   
+  
   return new Promise(function(resolve,reject){
-      if(pauseOperate==1){//일시정지
-        resolve(-2);
-      }
-      if(pauseOperate==1){
-        return -2;
-      }
       if(stopOperate==1){
           resolve(-1); // 정지버튼을 눌렀을 경우 -1을 반환
+      }
+      if(pauseOperate==2){
+        resolve(-7); // -7반환하여 재생 여부 확인
       }
       if(prediction[0].className == "mask" && prediction[0].probability.toFixed(2)>=0.70){
           resolve(1); // 마스크 착용 시 1을 반환
@@ -147,22 +173,22 @@ function check(prediction){//predict()의 prediction배열을 파라미터로 �
 
 async function predict() {
   // 예측 진행 함수
-    if(pauseOperate==1){
-      return 0;
-    }
+  if(pauseOperate==1){
+    return 1;
+  }
   let checkState = 0; // 현재 상태 확인 변수 
-
+  
   await webcam.pause();
   const prediction = await model.predict(webcam.canvas);
-
+  
   checkResult = await check(prediction); 
-    //-1 : 정지 , 0 : 미착용 , 1 : 착용 , 100 : 불분명
-    if(checkResult==-1){ //정지버튼을 눌렀을 경우 checkState를 0으로 변환하여 반환
-        return checkState;
-    }
-
+  //-1 : 정지 , 0 : 미착용 , 1 : 착용 , 100 : 불분명, -7 : 일시정지
+  if(checkResult==-1){ //정지버튼을 눌렀을 경우 checkState를 0으로 변환하여 반환
+    return checkState;
+  }
+  
   await new Promise((resolve, reject) => {
-    modal.style.display = "block";
+    mymodal.style.display = "block";
     resolve("");
   });
 
@@ -210,13 +236,22 @@ async function predict() {
         resolve("");
       }, 2000);
     });
-  }else{
+  }else if(checkResult==-7){
+    document.getElementById("text").innerHTML ="검사를 계속 진행하겠습니다.";
+    document.getElementById("maskimg").style.display = "none";
+    document.getElementById("modalText").style.display="none";
+    pauseOperate=0;
+  }
+  else{
     document.getElementById("text").innerHTML ="다시 검사하겠습니다.";
+    document.getElementById("maskimg").style.display = "none";
+    document.getElementById("modalText").style.display="none";
   }
   checkState = await new Promise((resolve, reject) => {
     setTimeout(() => {
       audio1.pause();
-      modal.style.display = "none";
+      mymodal.style.display = "none";
+      document.getElementById("maskimg").style.display = "block";
       resolve(1);
     }, 1000);
   });
@@ -239,6 +274,15 @@ async function predict() {
 ///////////////////사람 존재 여부 판독////////////////////////////
 //////////////////////////////////////////////////////////////////
 async function p_init() {
+  //////////////////////////
+  //=>시작버튼 누른후 마스크키퍼 글씨크기 줄이고, 주위 여백 줄임
+  var title = document.getElementById("index_title");
+  title.style.fontSize = "20px";
+  document.getElementById("index_body").style.margin = "10px";
+  document.getElementById("index_body").style.padding = "10px";
+  document.getElementById("index_title").style.margin = "10px";
+  document.getElementById("index_title").style.padding = "0px";
+  //////////////////////
   start_btn.style.display = "none"; // 시작 버튼 안보이게
   stop_btn.style.display="block"; // 종료 버튼 보이게
   pause_btn.style.display="block";
@@ -272,23 +316,20 @@ async function p_init() {
 async function p_loop() {
   labelContainer.childNodes[0].innerHTML = null;
   webcam.update(); // update the webcam frame
-  
-  checkPre = await p_predict();
-  
   if(pauseOperate==1){
     return;
   }
-  if(checkPre==1){
+  
+  checkPre = await p_predict(); // 상태값을 받아옴. 
+  
+  if(checkPre==1||pauseOperate==2){
       console.log="사람 있음"
       for(let i=0;i<20;i++){
        webcam.update(); // update the webcam frame
       }
       init();
-  }else{
-    if(stopOperate==1){
-      //한번도 판단을 안했을 때에도 정지버튼을 눌렀을 경우 함수탈출에 의해 판단종료
-      return ; 
-    }
+  }
+  else{
       window.requestAnimationFrame(p_loop);
   }
 }
@@ -301,3 +342,5 @@ async function p_predict() {
      return 0;
  }
 }
+
+
