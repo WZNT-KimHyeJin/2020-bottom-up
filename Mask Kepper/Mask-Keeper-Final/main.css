@@ -1,0 +1,293 @@
+html{
+  font-size: 10px;
+}
+.index_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  margin: 20px;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  background-color: white;
+}
+.index_body .index_title {
+  padding: 30px;
+  margin: 60px;
+  font-family: "Anton", sans-serif;
+  font-size: 7rem;
+  color: #1D3689;
+}
+
+
+.index_body .btn {
+  width: 140px;
+  height: 45px;
+  margin: 15px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: bolder;
+  color:white;
+  background-color:#1D3689; 
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.index_body .btn:hover {
+  background-color: rgb(161, 160, 160);
+  box-shadow: 0px 15px 20px  rgb(180, 180, 180);
+  color: #fff;
+  transform: translateY(-7px);
+  transition-property: font-size;
+  transition-duration: 1s;
+}
+
+.index_body .btn2 {
+  width: 120px;
+  height: 35px;
+  margin: 15px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: bolder;
+  color: white;
+  background-color: #1D3689; 
+  border: none;
+  border-radius: 45px;
+  cursor: pointer;
+  outline: none;
+}
+.index_body .btn:visited {
+  background-color: #1D3689;
+}
+.index_body #pause_btn{
+  display: none;
+}
+.index_body #stop_btn{
+  display: none;
+}
+.index_body .webcam {
+  margin-bottom: 30px;
+}
+
+.dropdownBT:hover{
+  background-color: rgb(161, 160, 160);
+  color: #fff;
+}
+.dropdownBT{
+  font-weight: bold;
+}
+
+.index_body .label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Anton", sans-serif; /*한글 지원 폰트로 변경하기*/
+  font-size: 1.5rem;
+}
+
+.index_body .modal {
+  display: none; /* Hidden by default 처음에 보이지 않음 */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top 위에 보여짐*/
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed 스크롤내려도 따라감*/
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.modal .modalcontent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fefefe;
+  margin: 50% auto; 
+  /* 15% from the top and centered */
+  padding: 0%;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+.modal #modalText {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  width: 90%;
+  text-align: center;
+}
+.modal #warningCNT{
+  color: red;
+}
+.modal #modalImfo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.modalcontent .firstcontent{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 95%;
+}
+.modalcontent .firstcontent #text{
+  font-weight: bolder;
+  font-size: 1.2rem;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.modal .modalcontent_2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fefefe;
+  margin: 25% auto; 
+  /* 15% from the top and centered */
+  padding: 0%;
+  border: 1px solid #888;
+  width: 95%; /* Could be more or less, depending on screen size */
+}
+
+.index_body .counting {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.index_body #buttons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#count_1, #count_2{
+  font-family: "Anton", sans-serif;
+  font-size: 20px;
+  margin: 20px;
+}
+
+#maskOn, #maskOff  {
+  width: 40px;
+  height: 40px;
+  margin: 20px;
+  border-radius: 50px;
+}
+
+#introMaskimg{
+  width: 100%;
+  height: 100%;
+}
+.modal #maskimg {
+  margin: 5%;
+  width: 100px;
+  height: 100px;
+  
+}
+.cntMask{ 
+  /* 판단을 시작할 때 결과창을 띄우기 위해서 counting 클래스 인자들을 모두 none 처리 해 둔다 */
+  display: none;
+}
+#stop_btn{
+  /* 처음 재생 시에는 stop 버튼이 안보이도록 해 놓음 */
+  display:none;
+}
+.index_body .result_counting{
+  display: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.index_body .circlebutton{
+  width: 35px;
+  height: 35px;
+  float: right;
+  border-radius: 50px ;
+  border: 2px solid #1D3689;
+  margin-top: 10px;
+}
+
+
+.index_body #mute :visited {
+  background-color: gray;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {/*마우스 올렸을때, 클릭할때 색깔 바뀜*/
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+iframe{
+  top: -200px; 
+  left: -200px;
+  width: 500px 100%;
+  height: 600px;
+}
+
+.dropbtn {
+  background-color: #1D3689;
+  color: white;
+  padding: 10px;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color:  rgb(161, 160, 160);
+}
+
+.dropdown {
+  position: relative;
+  margin-right: 100%;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 230px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  font-size: 13px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+.dropdown-content a :hover {background-color: #f1f1f1}
+.show {display:block;}
+
+.index_body #LD{
+  display: none;
+  width: 300px;
+  border: 2px solid #1D3689
+  
+}

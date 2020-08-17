@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mask Keeper</title>
+    <link rel = "stylesheet" href="stylesheet.css"></link>
+    <link rel="shortcut icon" type="image/x-icon" href="https://image.flaticon.com/icons/svg/2950/2950157.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Indie+Flower&family=Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Staatliches&display=swap" rel="stylesheet">
+</head>
+<body class="index_body" id="index_body">
+    <div class="dropdown">
+        <button onclick="dropdownclick()" class="dropbtn">≡</button>
+        <div id="myDropdown" class="dropdown-content">
+        
+            <a class ="dropdownBT" onclick="imfo_f()">어플 사용 안내</a>
+            <a class ="dropdownBT" onclick="intromask_f()">올바른 마스크 착용 방법</a>
+        </div>
+    </div>
+
+    <div class="index_title" id="index_title">  Mask Keeper</div>
+    <button type="button" class="btn" id="start_btn" onclick="p_init()">검사 시작</button>
+    
+    <img id ="LD" src="LDing.gif">
+    <div id="webcam-container" class="webcam"></div>
+    <div id="label-container" class="label"></div>
+    
+    <div class ="counting"> 
+        <img id="maskOn" class="cntMask" src="maskon.jpg">
+        <div id="count_1" class="cntMask">0</div>
+        <img id="maskOff" class="cntMask" src="maskoff.jpg">
+        <div id="count_2" class="cntMask">0</div>
+    </div>
+    <div id ="buttons">
+        <button type="button" class="btn2" onclick="pausePRD()" id = "pause_btn">일시 정지</button>
+        <button type="button" class="btn2" onclick="stopPlay()" id = "stop_btn">검사 종료</button>
+    </div>
+
+    <img type ="button" class="circlebutton" id="mute" src="soundOn.jpg">
+   
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+    <div id="myModal" class="modal">
+        <div class="modalcontent">
+            <div class="firstcontent">
+                <img id="maskimg" class="alerting" src="">
+                <span id="text" class="alerting">   </span>
+            </div>
+            <div id ="modalText">
+                <div>
+                    <br>
+                    <span class= "warningText">당신을 제외한 </span>
+                    <span class= "warningText" id="warningCNT">0</span>
+                    <span class= "warningText">명이</span>
+                    <br>
+                </div>
+                <div>
+                    <br>
+                    <span class="warningText">마스크를 착용하였습니다.</span>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="imfoModal" class="modal">
+        <div class="modalcontent_2">
+            <div id="madalImfo">
+                <span class="close">&times;</span>
+                <img id="introMaskimg" src="">
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script src="js/js.js" class="javaScript"></script>
+</html>

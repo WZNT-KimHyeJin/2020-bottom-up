@@ -1,0 +1,22 @@
+@import "reset.css";
+@import "main.css";
+
+* {
+  box-sizing: border-box;
+  /*원래는 설정한 크기의 기본 박스에 padding을 주면 초기 설정 사이즈 + padding값만큼 박스가 커지는데,
+  boder-box를 사용하면 박스의 사이즈가 바뀌지않음
+  nav-bar.css에서 width : 100%와 padding 50px를 그냥 쓰면 두 값이 더해지기때문에 아이콘이 짤리게 된 것*/
+}
+
+body {
+  background-color: white;
+  padding: 10px 20px;
+  color: #020202;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none; /*링크에 생기는 밑줄하는 decoration제거*/
+}
